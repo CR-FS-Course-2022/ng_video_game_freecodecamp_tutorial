@@ -42,7 +42,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.gameSub = this.httpService
       .getGameDetails(id)
       .subscribe((gameResp: Game) => {
-        console.log(gameResp)
         this.game = gameResp;
         setTimeout(() => {
           this.gameRating = this.game.metacritic;
