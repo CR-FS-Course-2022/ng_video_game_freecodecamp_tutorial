@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/services/http.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
 })
-export class DetailsComponent implements OnInit, OnDestroy{
+export class DetailsComponent implements OnInit, OnDestroy {
   gameRating = 0;
   gameId = '';
   routeSub = new Subscription();
@@ -29,22 +29,25 @@ export class DetailsComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if(this.gameSub) {
+    if (this.gameSub) {
       this.gameSub.unsubscribe();
     }
 
-    if(this.routeSub) {
+    if (this.routeSub) {
       this.routeSub.unsubscribe();
     }
   }
 
   getGameDetails(id: string) {
-    this.gameSub = this.httpService.getGameDetails(id).subscribe((gameResp: Game) => {
-      this.game = gameResp;
-      setTimeout(() => {
-        this.gameRating = this.game.metacritic;
-      }, 1000);
-    });
+    this.gameSub = this.httpService
+      .getGameDetails(id)
+      .subscribe((gameResp: Game) => {
+        console.log(gameResp)
+        this.game = gameResp;
+        setTimeout(() => {
+          this.gameRating = this.game.metacritic;
+        }, 1000);
+      });
   }
 
   getColor(value: number): string {
